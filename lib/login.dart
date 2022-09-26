@@ -64,13 +64,18 @@ class _LoginPageState extends State<LoginPage> {
               obscureText: true,
             ),
             // TODO: Add button bar (101)
-            OverflowBar(
-              alignment: MainAxisAlignment.end,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               // TODO: Add a beveled rectangular border to CANCEL (103)
               children: <Widget>[
                 // TODO: Add buttons (101)
                 TextButton(
-                  child: const Text('CANCEL'),
+                  child: const Text(
+                    'CANCEL',
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
                   onPressed: () {
                     // TODO: Clear the text fields (101)
                     _usernameController.clear();
@@ -78,14 +83,26 @@ class _LoginPageState extends State<LoginPage> {
                   },
                 ),
                 TextButton(
-                  child: const Text('Sign Up'),
-                  onPressed: () {
-                  },
+                  child: const Text(
+                    'Sign Up',
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                  onPressed: () {},
                 ),
                 // TODO: Add an elevation to NEXT (103)
                 // TODO: Add a beveled rectangular border to NEXT (103)
                 ElevatedButton(
-                  child: const Text('NEXT'),
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0xFFE0E0E0),
+                  ),
+                  child: const Text(
+                    'NEXT',
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
                   onPressed: () {
                     // TODO: Show the next page (101)
                     Navigator.pop(context);
