@@ -32,6 +32,8 @@ class _SignUpPageState extends State<SignUpPage> {
                   labelText: 'Username',
                 ),
                 validator: (value) {
+                  String _temp = value.toString();
+                  
                   if (value!.isEmpty) {
                     return 'Username is invalid';
                   }
@@ -58,7 +60,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 obscureText: true,
                 validator: (value) {
-                  if (value!.isEmpty) {
+                  if (_passwordController.text != _passwordConfirmController.text) {
                     return 'Confirm Password doesnʼt match Password';
                   }
                   return null;
