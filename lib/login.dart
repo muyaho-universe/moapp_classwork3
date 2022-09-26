@@ -109,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   onPressed: () {
                     // TODO: Show the next page (101)
-                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/home');
                   },
                 ),
               ],
