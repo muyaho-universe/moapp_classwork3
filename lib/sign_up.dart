@@ -9,6 +9,7 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  final _formKey = GlobalKey<FormState>();
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
   final _passwordConfirmController = TextEditingController();
@@ -18,64 +19,94 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
-          children: [
-            const SizedBox(height: 12.0),
-            TextField(
-              controller: _usernameController,
-              decoration: const InputDecoration(
-                filled: true,
-                labelText: 'Username',
-              ),
-            ),
-// spacer
-            const SizedBox(height: 12.0),
-            TextField(
-              controller: _passwordController,
-              decoration: const InputDecoration(
-                filled: true,
-                labelText: 'Password',
-              ),
-              obscureText: true,
-            ),
-            const SizedBox(height: 12.0),
-            TextField(
-              controller: _passwordConfirmController,
-              decoration: const InputDecoration(
-                filled: true,
-                labelText: 'Confirm Password',
-              ),
-              obscureText: true,
-            ),
-            const SizedBox(height: 12.0),
-            TextField(
-              controller: _emailAddressController,
-              decoration: const InputDecoration(
-                filled: true,
-                labelText: 'Email Address',
-              ),
-            ),
-            OverflowBar(
-              alignment: MainAxisAlignment.end,
-              children: <Widget>[
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Color(0xFFE0E0E0),
-                  ),
-                  child: const Text(
-                    'SIGN UP',
-                    style: TextStyle(
-                      color: Colors.black,
-                    ),
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
+        child: Form(
+          key: _formKey,
+          child: ListView(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            children: <Widget>[
+              const SizedBox(height: 12.0),
+              TextFormField(
+                controller: _usernameController,
+                decoration: const InputDecoration(
+                  filled: true,
+                  labelText: 'Username',
                 ),
-              ],
-            ),
-          ],
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Username is invalid';
+                  }
+                  return null;
+                },
+              ),
+// spacer
+              const SizedBox(height: 12.0),
+              TextField(
+                controller: _passwordController,
+                decoration: const InputDecoration(
+                  filled: true,
+                  labelText: 'Password',
+                ),
+                obscureText: true,
+
+              ),
+              const SizedBox(height: 12.0),
+              TextFormField(
+                controller: _passwordConfirmController,
+                decoration: const InputDecoration(
+                  filled: true,
+                  labelText: 'Confirm Password',
+                ),
+                obscureText: true,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Confirm Password doesnʼt match Password';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 12.0),
+              TextFormField(
+                controller: _emailAddressController,
+                decoration: const InputDecoration(
+                  filled: true,
+                  labelText: 'Email Address',
+                ),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please enter Email Address';
+                  }
+                  return null;
+                },
+              ),
+              OverflowBar(
+                alignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Color(0xFFE0E0E0),
+                    ),
+                    child: const Text(
+                      'SIGN UP',
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                    onPressed: () {
+                      // Validate returns true if the form is valid, or false otherwise.
+                      if (_formKey.currentState!.validate()) {
+                        // If the form is valid, display a snackbar. In the real world,
+                        // you'd often call a server or save the information in a database.
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Processing Data')),
+                        );
+                      }
+                      // Navigator.pop(context);
+                    },
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
