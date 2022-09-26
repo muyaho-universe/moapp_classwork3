@@ -59,8 +59,9 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 obscureText: true,
                 validator: (value) {
-                  if (_passwordController.text !=
-                      _passwordConfirmController.text) {
+                  if (value!.isEmpty ||
+                      (_passwordController.text !=
+                          _passwordConfirmController.text)) {
                     return 'Confirm Password doesnʼt match Password';
                   }
                   return null;
@@ -96,7 +97,6 @@ class _SignUpPageState extends State<SignUpPage> {
                     onPressed: () {
                       // Validate returns true if the form is valid, or false otherwise.
                       if (_formKey.currentState!.validate()) {
-
                         Navigator.pop(context);
                       }
                     },
