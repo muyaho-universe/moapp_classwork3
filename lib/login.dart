@@ -77,6 +77,11 @@ class _LoginPageState extends State<LoginPage> {
                     _passwordController.clear();
                   },
                 ),
+                TextButton(
+                  child: const Text('Sign Up'),
+                  onPressed: () {
+                  },
+                ),
                 // TODO: Add an elevation to NEXT (103)
                 // TODO: Add a beveled rectangular border to NEXT (103)
                 ElevatedButton(
