@@ -18,6 +18,7 @@ import 'package:intl/intl.dart';
 import 'model/product.dart';
 import 'model/products_repository.dart';
 
+
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -85,19 +86,80 @@ class HomePage extends StatelessWidget {
     // TODO: Return an AsymmetricView (104)
     // TODO: Pass Category variable to AsymmetricView (104)
     return Scaffold(
+      drawer: Drawer(
+        // Add a ListView to the drawer. This ensures the user can scroll
+        // through the options in the drawer if there isn't enough vertical
+        // space to fit everything.
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text('Pages'),
+            ),
+            ListTile(
+              title: const Text('Home'),
+              leading: Icon(Icons.home),
+              iconColor: Colors.blueAccent,
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: const Text('Search'),
+              leading: Icon(Icons.search),
+              iconColor: Colors.blueAccent,
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: const Text('Favorite Hotel'),
+              leading: Icon(Icons.location_city),
+              iconColor: Colors.blueAccent,
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: const Text('My Page'),
+              leading: Icon(Icons.person),
+              iconColor: Colors.blueAccent,
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: const Text('Log Out'),
+              leading: Icon(Icons.logout),
+              iconColor: Colors.blueAccent,
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      ),
       // TODO: Add app bar (102)
       appBar: AppBar(
         // TODO: Add buttons and title (102)
         title: const Text('SHRINE'),
-        leading: IconButton(
-          icon: const Icon(
-            Icons.menu,
-            semanticLabel: 'menu',
-          ),
-          onPressed: () {
-            print('Menu button');
-          },
-        ),
+        // leading: IconButton(
+        //   icon: const Icon(
+        //     Icons.menu,
+        //     semanticLabel: 'menu',
+        //   ),
+        //   onPressed: () {
+        //     print('Menu button');
+        //   },
+        // ),
         // TODO: Add trailing buttons (102)
         actions: <Widget>[
           IconButton(
@@ -122,12 +184,12 @@ class HomePage extends StatelessWidget {
       ),
       // TODO: Add a grid view (102)
       body: GridView.count(
-        crossAxisCount: 2,
-        padding: const EdgeInsets.all(16.0),
-        childAspectRatio: 8.0 / 9.0,
-        // TODO: Build a grid of cards (102)
+          crossAxisCount: 2,
+          padding: const EdgeInsets.all(16.0),
+          childAspectRatio: 8.0 / 9.0,
+          // TODO: Build a grid of cards (102)
           children: _buildGridCards(context) // Replace
-      ),
+          ),
       // TODO: Set resizeToAvoidBottomInset (101)
       resizeToAvoidBottomInset: false,
     );
