@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
+import 'package:shrine/sign_up.dart';
 
 import 'home.dart';
 import 'login.dart';
@@ -25,11 +26,12 @@ class ShrineApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Shrine',
-      initialRoute: '/login',
+      initialRoute: '/signup',
       routes: {
         '/login': (BuildContext context) => const LoginPage(),
         // TODO: Change to a Backdrop with a HomePage frontLayer (104)
         '/': (BuildContext context) => const HomePage(),
+        '/signup': (BuildContext context) => const SignUpPage(),
         // TODO: Make currentCategory field take _currentCategory (104)
         // TODO: Pass _currentCategory for frontLayer (104)
         // TODO: Change backLayer field value to CategoryMenuPage (104)
