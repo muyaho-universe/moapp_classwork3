@@ -19,10 +19,16 @@ import 'package:url_launcher/url_launcher.dart';
 import 'model/product.dart';
 import 'model/products_repository.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   final Uri _url = Uri.parse('https://www.handong.edu/');
+  final isSelected = <bool>[false, false];
 
   // TODO: Make a collection of cards (102)
   List<Card> _buildGridCards(BuildContext context) {
@@ -88,110 +94,150 @@ class HomePage extends StatelessWidget {
     // TODO: Return an AsymmetricView (104)
     // TODO: Pass Category variable to AsymmetricView (104)
     return Scaffold(
-      drawer: Drawer(
-        // Add a ListView to the drawer. This ensures the user can scroll
-        // through the options in the drawer if there isn't enough vertical
-        // space to fit everything.
-        child: ListView(
-          // Important: Remove any padding from the ListView.
-          padding: EdgeInsets.zero,
-          children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text(
-                '\n\nPages',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 36,
+        drawer: Drawer(
+          // Add a ListView to the drawer. This ensures the user can scroll
+          // through the options in the drawer if there isn't enough vertical
+          // space to fit everything.
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
+            children: [
+              const DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
+                child: Text(
+                  '\n\nPages',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 36,
+                  ),
                 ),
               ),
-            ),
-            ListTile(
-              title: const Text('Home'),
-              leading: Icon(Icons.home),
-              iconColor: Colors.blueAccent,
-              onTap: () {
-                // Update the state of the app.
-                // ...
+              ListTile(
+                title: const Text('Home'),
+                leading: Icon(Icons.home),
+                iconColor: Colors.blueAccent,
+                onTap: () {
+                  // Update the state of the app.
+                  // ...
+                },
+              ),
+              ListTile(
+                title: const Text('Search'),
+                leading: Icon(Icons.search),
+                iconColor: Colors.blueAccent,
+                onTap: () {
+                  // Update the state of the app.
+                  // ...
+                },
+              ),
+              ListTile(
+                title: const Text('Favorite Hotel'),
+                leading: Icon(Icons.location_city),
+                iconColor: Colors.blueAccent,
+                onTap: () {
+                  // Update the state of the app.
+                  // ...
+                },
+              ),
+              ListTile(
+                title: const Text('My Page'),
+                leading: Icon(Icons.person),
+                iconColor: Colors.blueAccent,
+                onTap: () {
+                  // Update the state of the app.
+                  // ...
+                },
+              ),
+              ListTile(
+                title: const Text('Log Out'),
+                leading: Icon(Icons.logout),
+                iconColor: Colors.blueAccent,
+                onTap: () {
+                  Navigator.pushNamed(context, '/login');
+                },
+              ),
+            ],
+          ),
+        ),
+        // TODO: Add app bar (102)
+        appBar: AppBar(
+          // TODO: Add buttons and title (102)
+          title: const Text('Menu'),
+
+          // TODO: Add trailing buttons (102)
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(
+                Icons.search,
+                semanticLabel: 'search',
+              ),
+              onPressed: () {
+                print('Search button');
               },
             ),
-            ListTile(
-              title: const Text('Search'),
-              leading: Icon(Icons.search),
-              iconColor: Colors.blueAccent,
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
-            ),
-            ListTile(
-              title: const Text('Favorite Hotel'),
-              leading: Icon(Icons.location_city),
-              iconColor: Colors.blueAccent,
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
-            ),
-            ListTile(
-              title: const Text('My Page'),
-              leading: Icon(Icons.person),
-              iconColor: Colors.blueAccent,
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
-            ),
-            ListTile(
-              title: const Text('Log Out'),
-              leading: Icon(Icons.logout),
-              iconColor: Colors.blueAccent,
-              onTap: () {
-                Navigator.pushNamed(context, '/login');
+            IconButton(
+              icon: const Icon(
+                Icons.language,
+                semanticLabel: 'filter',
+              ),
+              onPressed: () {
+                _launchUrl();
               },
             ),
           ],
         ),
-      ),
-      // TODO: Add app bar (102)
-      appBar: AppBar(
-        // TODO: Add buttons and title (102)
-        title: const Text('Menu'),
-
-        // TODO: Add trailing buttons (102)
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(
-              Icons.search,
-              semanticLabel: 'search',
+        // TODO: Add a grid view (102)
+        body: Column(
+          children: [
+            SizedBox(
+              height: 15,
             ),
-            onPressed: () {
-              print('Search button');
-            },
-          ),
-          IconButton(
-            icon: const Icon(
-              Icons.language,
-              semanticLabel: 'filter',
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                ToggleButtons(
+                  color: Colors.black.withOpacity(0.60),
+                  selectedColor: Colors.blue,
+                  selectedBorderColor: Colors.blue,
+                  fillColor: Colors.blue.withOpacity(0.08),
+                  splashColor: Colors.blue.withOpacity(0.12),
+                  hoverColor: Colors.blue.withOpacity(0.04),
+                  borderRadius: BorderRadius.circular(4.0),
+                  isSelected: isSelected,
+                  onPressed: (index) {
+                    // Respond to button selection
+                    setState(() {
+                      isSelected[index] = !isSelected[index];
+                      for (int i = 0; i < 2; i++) {
+                        if ((index != i) && isSelected[i]) {
+                          isSelected[i] = !isSelected[i];
+                        }
+                      }
+                    });
+                  },
+                  children: [
+                    Icon(Icons.list),
+                    Icon(Icons.grid_view),
+                  ],
+                ),
+                SizedBox(
+                  width: 15,
+                )
+              ],
             ),
-            onPressed: () {
-              _launchUrl();
-            },
-          ),
-        ],
-      ),
-      // TODO: Add a grid view (102)
-      body: GridView.count(
-          crossAxisCount: 2,
-          padding: const EdgeInsets.all(16.0),
-          childAspectRatio: 8.0 / 9.0,
-          // TODO: Build a grid of cards (102)
-          children: _buildGridCards(context) // Replace
-          ),
-      // TODO: Set resizeToAvoidBottomInset (101)
-      resizeToAvoidBottomInset: false,
+            Container(
+              child: GridView.count(
+                  crossAxisCount: 2,
+                  padding: const EdgeInsets.all(16.0),
+                  childAspectRatio: 8.0 / 9.0,
+                  // TODO: Build a grid of cards (102)
+                  children: _buildGridCards(context) // Replace
+                  ),
+            )
+          ],
+        ),
     );
   }
 
