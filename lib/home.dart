@@ -98,7 +98,13 @@ class HomePage extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.blue,
               ),
-              child: Text('Pages'),
+              child: Text(
+                  '\n\nPages',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 36,
+                ),
+              ),
             ),
             ListTile(
               title: const Text('Home'),
@@ -141,7 +147,7 @@ class HomePage extends StatelessWidget {
               leading: Icon(Icons.logout),
               iconColor: Colors.blueAccent,
               onTap: () {
-                Navigator.pop(context);
+                Navigator.pushNamed(context, '/login');
               },
             ),
           ],
