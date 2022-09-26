@@ -91,8 +91,8 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SignUpPage()));
+                    Navigator.pushNamed(context,
+                        '/signup');
                   },
                 ),
                 // TODO: Add an elevation to NEXT (103)

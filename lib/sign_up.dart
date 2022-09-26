@@ -33,7 +33,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 validator: (value) {
                   String _temp = value.toString();
-                  
+
                   if (value!.isEmpty) {
                     return 'Username is invalid';
                   }
@@ -49,7 +49,6 @@ class _SignUpPageState extends State<SignUpPage> {
                   labelText: 'Password',
                 ),
                 obscureText: true,
-
               ),
               const SizedBox(height: 12.0),
               TextFormField(
@@ -60,7 +59,8 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 obscureText: true,
                 validator: (value) {
-                  if (_passwordController.text != _passwordConfirmController.text) {
+                  if (_passwordController.text !=
+                      _passwordConfirmController.text) {
                     return 'Confirm Password doesnʼt match Password';
                   }
                   return null;
@@ -96,13 +96,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     onPressed: () {
                       // Validate returns true if the form is valid, or false otherwise.
                       if (_formKey.currentState!.validate()) {
-                        // If the form is valid, display a snackbar. In the real world,
-                        // you'd often call a server or save the information in a database.
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Processing Data')),
-                        );
+
+                        Navigator.pop(context);
                       }
-                      // Navigator.pop(context);
                     },
                   ),
                 ],
