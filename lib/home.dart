@@ -14,13 +14,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'model/product.dart';
 import 'model/products_repository.dart';
 
-
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
+
+  final Uri _url = Uri.parse('https://www.handong.edu/');
 
   // TODO: Make a collection of cards (102)
   List<Card> _buildGridCards(BuildContext context) {
@@ -99,7 +101,7 @@ class HomePage extends StatelessWidget {
                 color: Colors.blue,
               ),
               child: Text(
-                  '\n\nPages',
+                '\n\nPages',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 36,
@@ -156,16 +158,8 @@ class HomePage extends StatelessWidget {
       // TODO: Add app bar (102)
       appBar: AppBar(
         // TODO: Add buttons and title (102)
-        title: const Text('SHRINE'),
-        // leading: IconButton(
-        //   icon: const Icon(
-        //     Icons.menu,
-        //     semanticLabel: 'menu',
-        //   ),
-        //   onPressed: () {
-        //     print('Menu button');
-        //   },
-        // ),
+        title: const Text('Menu'),
+
         // TODO: Add trailing buttons (102)
         actions: <Widget>[
           IconButton(
@@ -179,11 +173,11 @@ class HomePage extends StatelessWidget {
           ),
           IconButton(
             icon: const Icon(
-              Icons.tune,
+              Icons.language,
               semanticLabel: 'filter',
             ),
             onPressed: () {
-              print('Filter button');
+              _launchUrl();
             },
           ),
         ],
@@ -199,5 +193,11 @@ class HomePage extends StatelessWidget {
       // TODO: Set resizeToAvoidBottomInset (101)
       resizeToAvoidBottomInset: false,
     );
+  }
+
+  Future<void> _launchUrl() async {
+    if (!await launchUrl(_url)) {
+      throw 'Could not launch $_url';
+    }
   }
 }
