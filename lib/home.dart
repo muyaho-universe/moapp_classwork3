@@ -28,9 +28,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final Uri _url = Uri.parse('https://www.handong.edu/');
-  final isSelected = <bool>[true, false];
+  final isSelected = <bool>[false, true];
 
-  bool _isList = true;
+
+  bool _isList = false;
 
   // TODO: Make a collection of cards (102)
   List<Card> _buildGridCards(BuildContext context) {
@@ -96,150 +97,156 @@ class _HomePageState extends State<HomePage> {
     // TODO: Return an AsymmetricView (104)
     // TODO: Pass Category variable to AsymmetricView (104)
     return Scaffold(
-        drawer: Drawer(
-          // Add a ListView to the drawer. This ensures the user can scroll
-          // through the options in the drawer if there isn't enough vertical
-          // space to fit everything.
-          child: ListView(
-            // Important: Remove any padding from the ListView.
-            padding: EdgeInsets.zero,
+      drawer: Drawer(
+        // Add a ListView to the drawer. This ensures the user can scroll
+        // through the options in the drawer if there isn't enough vertical
+        // space to fit everything.
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text(
+                '\n\nPages',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 36,
+                ),
+              ),
+            ),
+            ListTile(
+              title: const Text('Home'),
+              leading: Icon(Icons.home),
+              iconColor: Colors.blueAccent,
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: const Text('Search'),
+              leading: Icon(Icons.search),
+              iconColor: Colors.blueAccent,
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: const Text('Favorite Hotel'),
+              leading: Icon(Icons.location_city),
+              iconColor: Colors.blueAccent,
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: const Text('My Page'),
+              leading: Icon(Icons.person),
+              iconColor: Colors.blueAccent,
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: const Text('Log Out'),
+              leading: Icon(Icons.logout),
+              iconColor: Colors.blueAccent,
+              onTap: () {
+                Navigator.pushNamed(context, '/login');
+              },
+            ),
+          ],
+        ),
+      ),
+      // TODO: Add app bar (102)
+      appBar: AppBar(
+        // TODO: Add buttons and title (102)
+        title: const Text('Menu'),
+
+        // TODO: Add trailing buttons (102)
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(
+              Icons.search,
+              semanticLabel: 'search',
+            ),
+            onPressed: () {
+              print('Search button');
+            },
+          ),
+          IconButton(
+            icon: const Icon(
+              Icons.language,
+              semanticLabel: 'filter',
+            ),
+            onPressed: () {
+              _launchUrl();
+            },
+          ),
+        ],
+      ),
+      // TODO: Add a grid view (102)
+      body: new ListView(
+        children: <Widget>[
+          SizedBox(
+            height: 15,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              const DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                ),
-                child: Text(
-                  '\n\nPages',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 36,
-                  ),
-                ),
-              ),
-              ListTile(
-                title: const Text('Home'),
-                leading: Icon(Icons.home),
-                iconColor: Colors.blueAccent,
-                onTap: () {
-                  // Update the state of the app.
-                  // ...
+              ToggleButtons(
+                color: Colors.black.withOpacity(0.60),
+                selectedColor: Colors.blue,
+                selectedBorderColor: Colors.blue,
+                fillColor: Colors.blue.withOpacity(0.08),
+                splashColor: Colors.blue.withOpacity(0.12),
+                hoverColor: Colors.blue.withOpacity(0.04),
+                borderRadius: BorderRadius.circular(4.0),
+                isSelected: isSelected,
+                onPressed: (index) {
+                  // Respond to button selection
+                  setState(() {
+                    if(index == 0){
+                      _isList = true;
+                      isSelected[0] = true;
+                      isSelected[1] = false;
+                    }
+                    else{
+                      _isList = false;
+                      isSelected[0] = false;
+                      isSelected[1] = true;
+                    }
+                  });
                 },
+                children: [
+                  Icon(Icons.list),
+                  Icon(Icons.grid_view),
+                ],
               ),
-              ListTile(
-                title: const Text('Search'),
-                leading: Icon(Icons.search),
-                iconColor: Colors.blueAccent,
-                onTap: () {
-                  // Update the state of the app.
-                  // ...
-                },
-              ),
-              ListTile(
-                title: const Text('Favorite Hotel'),
-                leading: Icon(Icons.location_city),
-                iconColor: Colors.blueAccent,
-                onTap: () {
-                  // Update the state of the app.
-                  // ...
-                },
-              ),
-              ListTile(
-                title: const Text('My Page'),
-                leading: Icon(Icons.person),
-                iconColor: Colors.blueAccent,
-                onTap: () {
-                  // Update the state of the app.
-                  // ...
-                },
-              ),
-              ListTile(
-                title: const Text('Log Out'),
-                leading: Icon(Icons.logout),
-                iconColor: Colors.blueAccent,
-                onTap: () {
-                  Navigator.pushNamed(context, '/login');
-                },
+              SizedBox(
+                width: 15,
               ),
             ],
           ),
-        ),
-        // TODO: Add app bar (102)
-        appBar: AppBar(
-          // TODO: Add buttons and title (102)
-          title: const Text('Menu'),
-
-          // TODO: Add trailing buttons (102)
-          actions: <Widget>[
-            IconButton(
-              icon: const Icon(
-                Icons.search,
-                semanticLabel: 'search',
-              ),
-              onPressed: () {
-                print('Search button');
-              },
+          new Expanded(
+            child: GridView.count(
+              crossAxisCount: 2,
+              padding: const EdgeInsets.all(16.0),
+              childAspectRatio: 8.0 / 9.0,
+              shrinkWrap: true,
+              // TODO: Build a grid of cards (102)
+              children: _buildGridCards(context),
+              physics: BouncingScrollPhysics(),
             ),
-            IconButton(
-              icon: const Icon(
-                Icons.language,
-                semanticLabel: 'filter',
-              ),
-              onPressed: () {
-                _launchUrl();
-              },
-            ),
-          ],
-        ),
-        // TODO: Add a grid view (102)
-        body: ListView(
-          children: [
-            SizedBox(
-              height: 15,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                ToggleButtons(
-                  color: Colors.black.withOpacity(0.60),
-                  selectedColor: Colors.blue,
-                  selectedBorderColor: Colors.blue,
-                  fillColor: Colors.blue.withOpacity(0.08),
-                  splashColor: Colors.blue.withOpacity(0.12),
-                  hoverColor: Colors.blue.withOpacity(0.04),
-                  borderRadius: BorderRadius.circular(4.0),
-                  isSelected: isSelected,
-                  onPressed: (index) {
-                    // Respond to button selection
-                    setState(() {
-                      isSelected[index] = !isSelected[index];
-                      for (int i = 0; i < 2; i++) {
-                        if ((index != i) && isSelected[i]) {
-                          isSelected[i] = !isSelected[i];
-                        }
-                      }
-                    });
-                  },
-                  children: [
-                    Icon(Icons.list),
-                    Icon(Icons.grid_view),
-                  ],
-                ),
-                SizedBox(
-                  width: 15,
-                )
-              ],
-            ),
-            // Container(
-            //   child: GridView.count(
-            //       crossAxisCount: 2,
-            //       padding: const EdgeInsets.all(16.0),
-            //       childAspectRatio: 8.0 / 9.0,
-            //       // TODO: Build a grid of cards (102)
-            //       children: _buildGridCards(context) // Replace
-            //       ),
-            // )
-          ],
-        ),
+          ),
+        ],
+      ),
     );
   }
 
