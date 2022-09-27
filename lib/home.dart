@@ -28,7 +28,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final Uri _url = Uri.parse('https://www.handong.edu/');
-  final isSelected = <bool>[false, false];
+  final isSelected = <bool>[true, false];
+
+  bool _isList = true;
 
   // TODO: Make a collection of cards (102)
   List<Card> _buildGridCards(BuildContext context) {
@@ -189,7 +191,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         // TODO: Add a grid view (102)
-        body: Column(
+        body: ListView(
           children: [
             SizedBox(
               height: 15,
@@ -227,15 +229,15 @@ class _HomePageState extends State<HomePage> {
                 )
               ],
             ),
-            Container(
-              child: GridView.count(
-                  crossAxisCount: 2,
-                  padding: const EdgeInsets.all(16.0),
-                  childAspectRatio: 8.0 / 9.0,
-                  // TODO: Build a grid of cards (102)
-                  children: _buildGridCards(context) // Replace
-                  ),
-            )
+            // Container(
+            //   child: GridView.count(
+            //       crossAxisCount: 2,
+            //       padding: const EdgeInsets.all(16.0),
+            //       childAspectRatio: 8.0 / 9.0,
+            //       // TODO: Build a grid of cards (102)
+            //       children: _buildGridCards(context) // Replace
+            //       ),
+            // )
           ],
         ),
     );

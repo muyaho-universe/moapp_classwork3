@@ -99,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                 // TODO: Add a beveled rectangular border to NEXT (103)
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFFE0E0E0),
+                    primary: Color(0xFFE0E0E0),
                   ),
                   child: const Text(
                     'NEXT',
