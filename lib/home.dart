@@ -256,3 +256,17 @@ class _HomePageState extends State<HomePage> {
     }
   }
 }
+
+class ChangeWidget extends StatefulWidget {
+  const ChangeWidget({Key? key}) : super(key: key);
+
+  @override
+  State<ChangeWidget> createState() => _ChangeWidgetState();
+}
+
+class _ChangeWidgetState extends State<ChangeWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
