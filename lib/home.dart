@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
+                padding: const EdgeInsets.fromLTRB(16.0, 6.0, 16.0, 4.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -68,10 +68,20 @@ class _HomePageState extends State<HomePage> {
                       style: theme.textTheme.headline6,
                       maxLines: 1,
                     ),
-                    const SizedBox(height: 8.0),
+                    const SizedBox(height: 4.0),
                     Text(
                       formatter.format(product.price),
                       style: theme.textTheme.subtitle2,
+                    ),
+                    // SizedBox(height: 2.0,),
+                    TextButton(
+                      style: ButtonStyle(
+                        minimumSize: MaterialStateProperty.all<Size>(
+                          Size(50, 5),
+                        ),
+                      ),
+                      onPressed: () {},
+                      child: Text("more"),
                     ),
                   ],
                 ),
@@ -105,7 +115,6 @@ class _HomePageState extends State<HomePage> {
               child: Image.asset(
                 product.assetName,
                 package: product.assetPackage,
-
                 fit: BoxFit.fitWidth,
               ),
             ),
@@ -283,63 +292,62 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             )
-          : OrientationBuilder(
-            builder: (context, orientation) {
+          : OrientationBuilder(builder: (context, orientation) {
               return ListView(
-                  children: <Widget>[
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        ToggleButtons(
-                          color: Colors.black.withOpacity(0.60),
-                          selectedColor: Colors.blue,
-                          selectedBorderColor: Colors.blue,
-                          fillColor: Colors.blue.withOpacity(0.08),
-                          splashColor: Colors.blue.withOpacity(0.12),
-                          hoverColor: Colors.blue.withOpacity(0.04),
-                          borderRadius: BorderRadius.circular(4.0),
-                          isSelected: isSelected,
-                          onPressed: (index) {
-                            // Respond to button selection
-                            setState(() {
-                              if (index == 0) {
-                                _isList = true;
-                                isSelected[0] = true;
-                                isSelected[1] = false;
-                              } else {
-                                _isList = false;
-                                isSelected[0] = false;
-                                isSelected[1] = true;
-                              }
-                            });
-                          },
-                          children: [
-                            Icon(Icons.list),
-                            Icon(Icons.grid_view),
-                          ],
-                        ),
-                        SizedBox(
-                          width: 15,
-                        ),
-                      ],
-                    ),
-                    Expanded(
-                      child: GridView.count(
-                        crossAxisCount: orientation == Orientation.portrait ? 2 : 3,
-                        padding: const EdgeInsets.all(16.0),
-                        childAspectRatio: 8.0 / 9.0,
-                        shrinkWrap: true,
-                        children: _buildGridCards(context),
-                        physics: BouncingScrollPhysics(),
+                children: <Widget>[
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      ToggleButtons(
+                        color: Colors.black.withOpacity(0.60),
+                        selectedColor: Colors.blue,
+                        selectedBorderColor: Colors.blue,
+                        fillColor: Colors.blue.withOpacity(0.08),
+                        splashColor: Colors.blue.withOpacity(0.12),
+                        hoverColor: Colors.blue.withOpacity(0.04),
+                        borderRadius: BorderRadius.circular(4.0),
+                        isSelected: isSelected,
+                        onPressed: (index) {
+                          // Respond to button selection
+                          setState(() {
+                            if (index == 0) {
+                              _isList = true;
+                              isSelected[0] = true;
+                              isSelected[1] = false;
+                            } else {
+                              _isList = false;
+                              isSelected[0] = false;
+                              isSelected[1] = true;
+                            }
+                          });
+                        },
+                        children: [
+                          Icon(Icons.list),
+                          Icon(Icons.grid_view),
+                        ],
                       ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                    ],
+                  ),
+                  Expanded(
+                    child: GridView.count(
+                      crossAxisCount:
+                          orientation == Orientation.portrait ? 2 : 3,
+                      padding: const EdgeInsets.all(16.0),
+                      childAspectRatio: 8.0 / 9.0,
+                      shrinkWrap: true,
+                      children: _buildGridCards(context),
+                      physics: BouncingScrollPhysics(),
                     ),
-                  ],
-                );
-            }
-          ),
+                  ),
+                ],
+              );
+            }),
     );
   }
 
