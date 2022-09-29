@@ -33,8 +33,23 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 validator: (value) {
                   String _temp = value.toString();
+                  int count_char = 0;
+                  int count_num = 0;
+                  bool go = true;
+                  for(int i =0; i < _temp.length; i++){
 
-                  if (value!.isEmpty) {
+                    int t =  _temp.codeUnitAt(i);
+                    if(((97 <= t) &&(t <= 122)) ||((65 <= t) &&(t <= 90))){
+                      count_char++;
+                    }
+                    if(((48 <= t) &&(t <= 57)) ){
+                      count_num++;
+                    }
+                    if((3 <= count_char) && (3 <= count_num)){
+                      go = false;
+                    }
+                  }
+                  if (value!.isEmpty || go) {
                     return 'Username is invalid';
                   }
                   return null;
