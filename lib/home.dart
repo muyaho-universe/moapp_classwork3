@@ -14,7 +14,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:shrine/home_list.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'model/product.dart';
@@ -31,8 +30,110 @@ class _HomePageState extends State<HomePage> {
   final Uri _url = Uri.parse('https://www.handong.edu/');
   final isSelected = <bool>[false, true];
 
-
   bool _isList = false;
+
+  List<Card> _buildGridCards(BuildContext context) {
+    List<Product> products = ProductsRepository.loadProducts(Category.all);
+
+    if (products.isEmpty) {
+      return const <Card>[];
+    }
+
+    final ThemeData theme = Theme.of(context);
+    final NumberFormat formatter = NumberFormat.simpleCurrency(
+        locale: Localizations.localeOf(context).toString());
+
+    return products.map((product) {
+      return Card(
+        clipBehavior: Clip.antiAlias,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            AspectRatio(
+              aspectRatio: 18 / 11,
+              child: Image.asset(
+                product.assetName,
+                package: product.assetPackage,
+                fit: BoxFit.fitWidth,
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      product.name,
+                      style: theme.textTheme.headline6,
+                      maxLines: 1,
+                    ),
+                    const SizedBox(height: 8.0),
+                    Text(
+                      formatter.format(product.price),
+                      style: theme.textTheme.subtitle2,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }).toList();
+  }
+
+  List<Card> _buildListCards(BuildContext context) {
+    List<Product> products = ProductsRepository.loadProducts(Category.all);
+
+    if (products.isEmpty) {
+      return const <Card>[];
+    }
+
+    final ThemeData theme = Theme.of(context);
+    final NumberFormat formatter = NumberFormat.simpleCurrency(
+        locale: Localizations.localeOf(context).toString());
+
+    return products.map((product) {
+      return Card(
+        clipBehavior: Clip.antiAlias,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              width: 100,
+              child: Image.asset(
+                product.assetName,
+                package: product.assetPackage,
+
+                fit: BoxFit.fitWidth,
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      product.name,
+                      style: theme.textTheme.headline6,
+                      maxLines: 1,
+                    ),
+                    const SizedBox(height: 8.0),
+                    Text(
+                      formatter.format(product.price),
+                      style: theme.textTheme.subtitle2,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }).toList();
+  }
 
   // TODO: Add a variable for Category (104)
   @override
@@ -107,12 +208,8 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      // TODO: Add app bar (102)
       appBar: AppBar(
-        // TODO: Add buttons and title (102)
         title: const Text('Menu'),
-
-        // TODO: Add trailing buttons (102)
         actions: <Widget>[
           IconButton(
             icon: const Icon(
@@ -134,52 +231,115 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      // TODO: Add a grid view (102)
-      body: new ListView(
-        children: <Widget>[
-          SizedBox(
-            height: 15,
+      body: _isList
+          ? ListView(
+              children: <Widget>[
+                SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    ToggleButtons(
+                      color: Colors.black.withOpacity(0.60),
+                      selectedColor: Colors.blue,
+                      selectedBorderColor: Colors.blue,
+                      fillColor: Colors.blue.withOpacity(0.08),
+                      splashColor: Colors.blue.withOpacity(0.12),
+                      hoverColor: Colors.blue.withOpacity(0.04),
+                      borderRadius: BorderRadius.circular(4.0),
+                      isSelected: isSelected,
+                      onPressed: (index) {
+                        // Respond to button selection
+                        setState(() {
+                          if (index == 0) {
+                            _isList = true;
+                            isSelected[0] = true;
+                            isSelected[1] = false;
+                          } else {
+                            _isList = false;
+                            isSelected[0] = false;
+                            isSelected[1] = true;
+                          }
+                        });
+                      },
+                      children: [
+                        Icon(Icons.list),
+                        Icon(Icons.grid_view),
+                      ],
+                    ),
+                    SizedBox(
+                      width: 15,
+                    ),
+                  ],
+                ),
+                Expanded(
+                  child: ListView(
+                    padding: const EdgeInsets.all(16.0),
+                    shrinkWrap: true,
+                    children: _buildListCards(context),
+                    physics: BouncingScrollPhysics(),
+                  ),
+                ),
+              ],
+            )
+          : OrientationBuilder(
+            builder: (context, orientation) {
+              return ListView(
+                  children: <Widget>[
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        ToggleButtons(
+                          color: Colors.black.withOpacity(0.60),
+                          selectedColor: Colors.blue,
+                          selectedBorderColor: Colors.blue,
+                          fillColor: Colors.blue.withOpacity(0.08),
+                          splashColor: Colors.blue.withOpacity(0.12),
+                          hoverColor: Colors.blue.withOpacity(0.04),
+                          borderRadius: BorderRadius.circular(4.0),
+                          isSelected: isSelected,
+                          onPressed: (index) {
+                            // Respond to button selection
+                            setState(() {
+                              if (index == 0) {
+                                _isList = true;
+                                isSelected[0] = true;
+                                isSelected[1] = false;
+                              } else {
+                                _isList = false;
+                                isSelected[0] = false;
+                                isSelected[1] = true;
+                              }
+                            });
+                          },
+                          children: [
+                            Icon(Icons.list),
+                            Icon(Icons.grid_view),
+                          ],
+                        ),
+                        SizedBox(
+                          width: 15,
+                        ),
+                      ],
+                    ),
+                    Expanded(
+                      child: GridView.count(
+                        crossAxisCount: orientation == Orientation.portrait ? 2 : 3,
+                        padding: const EdgeInsets.all(16.0),
+                        childAspectRatio: 8.0 / 9.0,
+                        shrinkWrap: true,
+                        children: _buildGridCards(context),
+                        physics: BouncingScrollPhysics(),
+                      ),
+                    ),
+                  ],
+                );
+            }
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              ToggleButtons(
-                color: Colors.black.withOpacity(0.60),
-                selectedColor: Colors.blue,
-                selectedBorderColor: Colors.blue,
-                fillColor: Colors.blue.withOpacity(0.08),
-                splashColor: Colors.blue.withOpacity(0.12),
-                hoverColor: Colors.blue.withOpacity(0.04),
-                borderRadius: BorderRadius.circular(4.0),
-                isSelected: isSelected,
-                onPressed: (index) {
-                  // Respond to button selection
-                  setState(() {
-                    if(index == 0){
-                      _isList = true;
-                      isSelected[0] = true;
-                      isSelected[1] = false;
-                    }
-                    else{
-                      _isList = false;
-                      isSelected[0] = false;
-                      isSelected[1] = true;
-                    }
-                  });
-                },
-                children: [
-                  Icon(Icons.list),
-                  Icon(Icons.grid_view),
-                ],
-              ),
-              SizedBox(
-                width: 15,
-              ),
-            ],
-          ),
-          // HomeListPage(_isList),
-        ],
-      ),
     );
   }
 
