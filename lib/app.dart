@@ -15,6 +15,7 @@
 import 'package:flutter/material.dart';
 import 'package:shrine/detail.dart';
 import 'package:shrine/model/hotel.dart';
+import 'package:shrine/my_page.dart';
 import 'package:shrine/search.dart';
 import 'package:shrine/sign_up.dart';
 
@@ -38,6 +39,7 @@ class ShrineApp extends StatelessWidget {
         '/signup': (BuildContext context) => const SignUpPage(),
         '/search': (BuildContext context) => const SearchPage(),
         '/favorite': (BuildContext context) => const FavoritHotelPage(),
+        '/my_page': (BuildContext context) => const MyPage(),
       },
 
     );
