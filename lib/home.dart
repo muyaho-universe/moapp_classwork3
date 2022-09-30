@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(16.0, 6.0, 16.0, 4.0),
+                padding: const EdgeInsets.fromLTRB(16.0, 2.0, 16.0, 0.5),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -68,25 +68,32 @@ class _HomePageState extends State<HomePage> {
                       style: theme.textTheme.headline6,
                       maxLines: 1,
                     ),
-                    const SizedBox(height: 4.0),
+                    // const SizedBox(height: 4.0),
                     Text(
                       formatter.format(product.price),
                       style: theme.textTheme.subtitle2,
                     ),
+
                     // SizedBox(height: 2.0,),
-                    TextButton(
-                      style: ButtonStyle(
-                        minimumSize: MaterialStateProperty.all<Size>(
-                          Size(50, 5),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TextButton(
+                          style: ButtonStyle(
+                            minimumSize: MaterialStateProperty.all<Size>(
+                              Size(16, 9),
+                            ),
+                          ),
+                          onPressed: () {},
+                          child: Text("more"),
                         ),
-                      ),
-                      onPressed: () {},
-                      child: Text("more"),
+                      ],
                     ),
                   ],
                 ),
               ),
             ),
+
           ],
         ),
       );
