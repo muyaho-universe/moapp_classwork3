@@ -14,6 +14,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:shrine/detail.dart';
+import 'package:shrine/model/hotel.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'model/product.dart';
@@ -84,7 +86,10 @@ class _HomePageState extends State<HomePage> {
                               Size(16, 9),
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Hotel hotel = new Hotel(loacation: "loacation", isFavorited: false, name: "Home", rate: 5);
+                            Navigator.push(context,  MaterialPageRoute(builder: (context) =>  DetailPage(hotel)));
+                          },
                           child: Text("more"),
                         ),
                       ],
