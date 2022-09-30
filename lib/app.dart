@@ -13,14 +13,17 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
+import 'package:shrine/detail.dart';
+import 'package:shrine/model/hotel.dart';
 import 'package:shrine/sign_up.dart';
 
 import 'home.dart';
 import 'login.dart';
 
-// TODO: Convert ShrineApp to stateful widget (104)
+
 class ShrineApp extends StatelessWidget {
   const ShrineApp({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -29,17 +32,10 @@ class ShrineApp extends StatelessWidget {
       initialRoute: '/login',
       routes: {
         '/login': (BuildContext context) => const LoginPage(),
-        // TODO: Change to a Backdrop with a HomePage frontLayer (104)
         '/home': (BuildContext context) => HomePage(),
         '/signup': (BuildContext context) => const SignUpPage(),
-        // TODO: Make currentCategory field take _currentCategory (104)
-        // TODO: Pass _currentCategory for frontLayer (104)
-        // TODO: Change backLayer field value to CategoryMenuPage (104)
       },
-      // TODO: Add a theme (103)
+
     );
   }
 }
-
-// TODO: Build a Shrine Theme (103)
-// TODO: Build a Shrine Text Theme (103)
