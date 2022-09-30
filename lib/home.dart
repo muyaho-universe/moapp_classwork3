@@ -36,6 +36,7 @@ class _HomePageState extends State<HomePage> {
 
   List<Card> _buildGridCards(BuildContext context) {
     List<Product> products = ProductsRepository.loadProducts(Category.all);
+    // List<Hotel> hotels = ProductsRepository.loadProducts(Category.all);
 
     if (products.isEmpty) {
       return const <Card>[];
@@ -54,8 +55,8 @@ class _HomePageState extends State<HomePage> {
             AspectRatio(
               aspectRatio: 18 / 11,
               child: Image.asset(
-                product.assetName,
-                package: product.assetPackage,
+                'assets/hotel01.jpg',
+
                 fit: BoxFit.fitWidth,
               ),
             ),
@@ -89,9 +90,9 @@ class _HomePageState extends State<HomePage> {
                           onPressed: () {
                             Hotel hotel = new Hotel(
                                 loacation: "loacation",
-                                isFavorited: false,
+
                                 name: "Home",
-                                rate: 5);
+                                rate: 5, id: 1);
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(

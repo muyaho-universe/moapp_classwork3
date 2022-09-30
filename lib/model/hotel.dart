@@ -1,14 +1,16 @@
 class Hotel{
 
-  Hotel({
+  const Hotel({
     required this.loacation,
-    required this.isFavorited,
     required this.name,
     required this.rate,
+    required this.id,
   });
 
-  int rate;
-  String loacation;
-  bool isFavorited;
-  String name;
+  final int rate;
+  final String loacation;
+  // late bool isFavorited;
+  final String name;
+  final int id;
+  String get assetName => 'hotel0$id.jpg';
 }
