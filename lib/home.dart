@@ -210,8 +210,7 @@ class _HomePageState extends State<HomePage> {
               leading: Icon(Icons.location_city),
               iconColor: Colors.blueAccent,
               onTap: () {
-                // Update the state of the app.
-                // ...
+                Navigator.pushNamed(context, '/favorite');
               },
             ),
             ListTile(
