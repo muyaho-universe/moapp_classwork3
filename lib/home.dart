@@ -201,7 +201,9 @@ class _HomePageState extends State<HomePage> {
               title: const Text('Search'),
               leading: Icon(Icons.search),
               iconColor: Colors.blueAccent,
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, '/search');
+              },
             ),
             ListTile(
               title: const Text('Favorite Hotel'),
@@ -242,7 +244,7 @@ class _HomePageState extends State<HomePage> {
               semanticLabel: 'search',
             ),
             onPressed: () {
-              print('Search button');
+              Navigator.pushNamed(context, '/search');
             },
           ),
           IconButton(
