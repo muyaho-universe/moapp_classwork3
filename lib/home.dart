@@ -87,8 +87,15 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           onPressed: () {
-                            Hotel hotel = new Hotel(loacation: "loacation", isFavorited: false, name: "Home", rate: 5);
-                            Navigator.push(context,  MaterialPageRoute(builder: (context) =>  DetailPage(hotel)));
+                            Hotel hotel = new Hotel(
+                                loacation: "loacation",
+                                isFavorited: false,
+                                name: "Home",
+                                rate: 5);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DetailPage(hotel)));
                           },
                           child: Text("more"),
                         ),
@@ -98,7 +105,6 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-
           ],
         ),
       );
@@ -195,10 +201,7 @@ class _HomePageState extends State<HomePage> {
               title: const Text('Search'),
               leading: Icon(Icons.search),
               iconColor: Colors.blueAccent,
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
+              onTap: () {},
             ),
             ListTile(
               title: const Text('Favorite Hotel'),
@@ -231,6 +234,7 @@ class _HomePageState extends State<HomePage> {
       ),
       appBar: AppBar(
         title: const Text('Menu'),
+        centerTitle: true,
         actions: <Widget>[
           IconButton(
             icon: const Icon(
