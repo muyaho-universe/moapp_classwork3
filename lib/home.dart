@@ -19,9 +19,6 @@ import 'package:shrine/model/hotel.dart';
 import 'package:shrine/model/hotels_repository.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'model/product.dart';
-import 'model/products_repository.dart';
-
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
 
@@ -56,26 +53,46 @@ class _HomePageState extends State<HomePage> {
               aspectRatio: 18 / 11,
               child: Image.asset(
                 hotel.assetName,
-                fit: BoxFit.fitWidth,
+                fit: BoxFit.fill,
               ),
             ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(16.0, 2.0, 16.0, 0.5),
+                padding: const EdgeInsets.fromLTRB(16.0, 1.0, 16.0, 0.5),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
+                    Icon(
+                      Icons.star,
+                      color: Colors.amber,
+                    ),
                     Text(
                       hotel.name,
-                      style: theme.textTheme.headline6,
+                      style: TextStyle(
+                        fontSize: 14,
+                      ),
                       maxLines: 1,
                     ),
                     // const SizedBox(height: 4.0),
-                    Text(
-                      hotel.location,
-                      style: theme.textTheme.subtitle2,
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.location_pin,
+                          size: 15,
+                          color: Colors.blue,
+                        ),
+                        SizedBox(
+                          width: 100,
+                          child: Text(
+                            hotel.location,
+                            style: TextStyle(
+                              fontSize: 10,
+                            ),
+                            maxLines: 2,
+                          ),
+                        ),
+                      ],
                     ),
-
                     // SizedBox(height: 2.0,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -124,11 +141,11 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             SizedBox(
-              width: 180,
-              height: 100,
+              width: 100,
+              height: 130,
               child: Image.asset(
                 hotel.assetName,
-                fit: BoxFit.fitWidth,
+                fit: BoxFit.fill,
               ),
             ),
             Expanded(
@@ -137,15 +154,37 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
+                    Icon(
+                      Icons.star,
+                      color: Colors.amber,
+                    ),
                     Text(
                       hotel.name,
-                      style: theme.textTheme.headline6,
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
                       maxLines: 1,
                     ),
                     const SizedBox(height: 8.0),
                     Text(
                       hotel.location,
-                      style: theme.textTheme.subtitle2,
+                      style: TextStyle(
+                        fontSize: 10,
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => DetailPage(hotel)));
+                            },
+                            child: Text("more"),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -350,7 +389,7 @@ class _HomePageState extends State<HomePage> {
                       crossAxisCount:
                           orientation == Orientation.portrait ? 2 : 3,
                       padding: const EdgeInsets.all(16.0),
-                      childAspectRatio: 8.0 / 9.0,
+                      childAspectRatio: .75,
                       shrinkWrap: true,
                       children: _buildGridCards(context),
                       physics: BouncingScrollPhysics(),
