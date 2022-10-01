@@ -123,11 +123,11 @@ class _HomePageState extends State<HomePage> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Container(
-              width: 100,
+            SizedBox(
+              width: 180,
+              height: 100,
               child: Image.asset(
                 hotel.assetName,
-
                 fit: BoxFit.fitWidth,
               ),
             ),
