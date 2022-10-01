@@ -16,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shrine/detail.dart';
 import 'package:shrine/model/hotel.dart';
+import 'package:shrine/model/hotels_repository.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'model/product.dart';
@@ -35,10 +36,9 @@ class _HomePageState extends State<HomePage> {
   bool _isList = false;
 
   List<Card> _buildGridCards(BuildContext context) {
-    List<Product> products = ProductsRepository.loadProducts(Category.all);
-    // List<Hotel> hotels = ProductsRepository.loadProducts(Category.all);
+    List<Hotel> hotels = HotelRepository.loadHotel();
 
-    if (products.isEmpty) {
+    if (hotels.isEmpty) {
       return const <Card>[];
     }
 
@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
     final NumberFormat formatter = NumberFormat.simpleCurrency(
         locale: Localizations.localeOf(context).toString());
 
-    return products.map((product) {
+    return hotels.map((hotel) {
       return Card(
         clipBehavior: Clip.antiAlias,
         child: Column(
@@ -55,8 +55,7 @@ class _HomePageState extends State<HomePage> {
             AspectRatio(
               aspectRatio: 18 / 11,
               child: Image.asset(
-                'assets/hotel01.jpg',
-
+                hotel.assetName,
                 fit: BoxFit.fitWidth,
               ),
             ),
@@ -67,13 +66,13 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      product.name,
+                      hotel.name,
                       style: theme.textTheme.headline6,
                       maxLines: 1,
                     ),
                     // const SizedBox(height: 4.0),
                     Text(
-                      formatter.format(product.price),
+                      hotel.location,
                       style: theme.textTheme.subtitle2,
                     ),
 
@@ -88,11 +87,6 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           onPressed: () {
-                            Hotel hotel = new Hotel(
-                                loacation: "loacation",
-
-                                name: "Home",
-                                rate: 5, id: 1);
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -113,9 +107,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   List<Card> _buildListCards(BuildContext context) {
-    List<Product> products = ProductsRepository.loadProducts(Category.all);
+    List<Hotel> hotels = HotelRepository.loadHotel();
 
-    if (products.isEmpty) {
+    if (hotels.isEmpty) {
       return const <Card>[];
     }
 
@@ -123,7 +117,7 @@ class _HomePageState extends State<HomePage> {
     final NumberFormat formatter = NumberFormat.simpleCurrency(
         locale: Localizations.localeOf(context).toString());
 
-    return products.map((product) {
+    return hotels.map((hotel) {
       return Card(
         clipBehavior: Clip.antiAlias,
         child: Row(
@@ -132,8 +126,8 @@ class _HomePageState extends State<HomePage> {
             Container(
               width: 100,
               child: Image.asset(
-                product.assetName,
-                package: product.assetPackage,
+                hotel.assetName,
+
                 fit: BoxFit.fitWidth,
               ),
             ),
@@ -144,13 +138,13 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      product.name,
+                      hotel.name,
                       style: theme.textTheme.headline6,
                       maxLines: 1,
                     ),
                     const SizedBox(height: 8.0),
                     Text(
-                      formatter.format(product.price),
+                      hotel.location,
                       style: theme.textTheme.subtitle2,
                     ),
                   ],

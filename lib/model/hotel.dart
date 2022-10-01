@@ -1,14 +1,14 @@
 class Hotel{
 
   const Hotel({
-    required this.loacation,
+    required this.location,
     required this.name,
     required this.rate,
     required this.id,
   });
 
   final int rate;
-  final String loacation;
+  final String location;
   // late bool isFavorited;
   final String name;
   final int id;
