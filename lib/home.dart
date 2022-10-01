@@ -51,9 +51,12 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             AspectRatio(
               aspectRatio: 18 / 11,
-              child: Image.asset(
-                hotel.assetName,
-                fit: BoxFit.fill,
+              child: Hero(
+                tag: hotel.assetName,
+                child: Image.asset(
+                  hotel.assetName,
+                  fit: BoxFit.fill,
+                ),
               ),
             ),
             Expanded(
@@ -63,7 +66,7 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Row(
-                      children :starRate(hotel.rate),
+                      children: starRate(hotel.rate),
                     ),
                     Text(
                       hotel.name,
@@ -138,16 +141,18 @@ class _HomePageState extends State<HomePage> {
         clipBehavior: Clip.antiAlias,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children:[
+          children: [
             SizedBox(
               width: 100,
               height: 130,
-              child: Image.asset(
-                hotel.assetName,
-                fit: BoxFit.fill,
+              child: Hero(
+                tag: hotel.assetName,
+                child: Image.asset(
+                  hotel.assetName,
+                  fit: BoxFit.fill,
+                ),
               ),
             ),
-
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
@@ -155,7 +160,7 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Row(
-                      children :starRate(hotel.rate),
+                      children: starRate(hotel.rate),
                     ),
                     Text(
                       hotel.name,
@@ -175,14 +180,13 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         TextButton(
-                            onPressed: () {
-                              // Hero(tag: tag, child: child)
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => DetailPage(hotel)));
-                            },
-                            child: Text("more"),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DetailPage(hotel)));
+                          },
+                          child: Text("more"),
                         ),
                       ],
                     ),
@@ -405,6 +409,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   List<Icon> starRate(int count) {
-    return List.generate(count, (i) => Icon(Icons.star_rate, color: Colors.amber)).toList(); // replace * with your rupee or use Icon instead
+    return List.generate(
+            count, (i) => Icon(Icons.star_rate, color: Colors.amber))
+        .toList(); // replace * with your rupee or use Icon instead
   }
 }

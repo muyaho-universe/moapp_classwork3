@@ -15,11 +15,20 @@ class DetailPage extends StatelessWidget {
         centerTitle: true,
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // Image.asset(
-          //                 hotel.assetName,
-          //                 fit: BoxFit.fitWidth,
-          //               ),
+          SizedBox(
+            width:  MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height / 3,
+            child: Hero(
+              tag: hotel.assetName,
+              child: Image.asset(
+                hotel.assetName,
+                fit: BoxFit.fill,
+              ),
+            ),
+          ),
+
           Text(hotel.name),
         ],
       ),
