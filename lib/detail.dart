@@ -15,10 +15,10 @@ class DetailPage extends StatelessWidget {
         centerTitle: true,
       ),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            width:  MediaQuery.of(context).size.width,
+            width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height / 3,
             child: Hero(
               tag: hotel.assetName,
@@ -28,10 +28,23 @@ class DetailPage extends StatelessWidget {
               ),
             ),
           ),
-
-          Text(hotel.name),
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(hotel.name),
+              ],
+            ),
+          ),
         ],
       ),
     );
+  }
+
+  List<Icon> starRate(int count) {
+    return List.generate(
+            count, (i) => Icon(Icons.star_rate, color: Colors.amber))
+        .toList(); // replace * with your rupee or use Icon instead
   }
 }
