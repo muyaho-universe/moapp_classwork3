@@ -62,9 +62,8 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Icon(
-                      Icons.star,
-                      color: Colors.amber,
+                    Row(
+                      children :starRate(hotel.rate),
                     ),
                     Text(
                       hotel.name,
@@ -139,7 +138,7 @@ class _HomePageState extends State<HomePage> {
         clipBehavior: Clip.antiAlias,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
+          children:[
             SizedBox(
               width: 100,
               height: 130,
@@ -148,15 +147,15 @@ class _HomePageState extends State<HomePage> {
                 fit: BoxFit.fill,
               ),
             ),
+
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Icon(
-                      Icons.star,
-                      color: Colors.amber,
+                    Row(
+                      children :starRate(hotel.rate),
                     ),
                     Text(
                       hotel.name,
@@ -177,6 +176,7 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         TextButton(
                             onPressed: () {
+                              // Hero(tag: tag, child: child)
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -196,11 +196,8 @@ class _HomePageState extends State<HomePage> {
     }).toList();
   }
 
-  // TODO: Add a variable for Category (104)
   @override
   Widget build(BuildContext context) {
-    // TODO: Return an AsymmetricView (104)
-    // TODO: Pass Category variable to AsymmetricView (104)
     return Scaffold(
       drawer: Drawer(
         // Add a ListView to the drawer. This ensures the user can scroll
@@ -405,5 +402,9 @@ class _HomePageState extends State<HomePage> {
     if (!await launchUrl(_url)) {
       throw 'Could not launch $_url';
     }
+  }
+
+  List<Icon> starRate(int count) {
+    return List.generate(count, (i) => Icon(Icons.star_rate, color: Colors.amber)).toList(); // replace * with your rupee or use Icon instead
   }
 }
