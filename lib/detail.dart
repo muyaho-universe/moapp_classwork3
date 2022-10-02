@@ -44,7 +44,7 @@ class _DetailPageState extends State<DetailPage> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Icon(
-                      Icons.favorite,
+                      isFavorited? Icons.favorite : Icons.favorite_border,
                       color: Colors.red,
                     ),
                   ),
