@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shrine/model/hotel.dart';
 
+import 'model/favorite_hotel_repository.dart';
+
 //TODO: Hero Animation
 class DetailPage extends StatefulWidget {
   DetailPage(this.hotel, {Key? key}) : super(key: key);
@@ -13,7 +15,14 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
-  bool isFavorited = false;
+  late bool isFavorited;
+  late int key;
+
+  @override
+  initState(){
+    key = widget.hotel.id;
+    isFavorited = FavoriteHotelRepository.favorite[key];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +39,22 @@ class _DetailPageState extends State<DetailPage> {
               SizedBox(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height / 3,
-                child: Hero(
-                  tag: widget.hotel.assetName,
-                  child: Image.asset(
-                    widget.hotel.assetName,
-                    fit: BoxFit.fill,
+                child: InkWell(
+                  onDoubleTap: (){
+                    setState(() {
+                      print(isFavorited);
+                      print(key);
+                      isFavorited = !isFavorited;
+                      FavoriteHotelRepository.favorite.update(key, (value) => isFavorited);
+                    });
+                    print(isFavorited);
+                  },
+                  child: Hero(
+                    tag: widget.hotel.assetName,
+                    child: Image.asset(
+                      widget.hotel.assetName,
+                      fit: BoxFit.fill,
+                    ),
                   ),
                 ),
               ),
