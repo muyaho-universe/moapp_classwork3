@@ -42,12 +42,9 @@ class _DetailPageState extends State<DetailPage> {
                 child: InkWell(
                   onDoubleTap: (){
                     setState(() {
-                      print(isFavorited);
-                      print(key);
                       isFavorited = !isFavorited;
                       FavoriteHotelRepository.favorite.update(key, (value) => isFavorited);
                     });
-                    print(isFavorited);
                   },
                   child: Hero(
                     tag: widget.hotel.assetName,
