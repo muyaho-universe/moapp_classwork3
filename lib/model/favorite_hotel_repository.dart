@@ -10,5 +10,5 @@ class FavoriteHotelRepository{
     6:false,
   };
 
-  static List<Hotel> favoriteHotel = List.empty(growable: true);
+  // static List<Hotel> favoriteHotel = List.empty(growable: true);
 }

@@ -45,6 +45,8 @@ class _DetailPageState extends State<DetailPage> {
                       isFavorited = !isFavorited;
                       FavoriteHotelRepository.favorite.update(key, (value) => isFavorited);
                     });
+                    // print(key);
+                    // print( widget.hotel.name);
                   },
                   child: Hero(
                     tag: widget.hotel.assetName,
