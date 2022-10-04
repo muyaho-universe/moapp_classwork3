@@ -9,6 +9,8 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  bool _isOpen = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +18,30 @@ class _SearchPageState extends State<SearchPage> {
         title: Text("Search"),
         centerTitle: true,
       ),
-      body: Text("hi"),
+      body: ListView(
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16.0, 16.0, 8.0, 8.0),
+            child: Row(
+              children: [
+                Text(
+                  "Filter",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  ),
+                ),
+                SizedBox(
+                  width: 15,
+                ),
+                ExpansionPanelList(
+
+                )
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }
