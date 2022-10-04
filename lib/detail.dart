@@ -85,7 +85,28 @@ class _DetailPageState extends State<DetailPage> {
                 SizedBox(
                   height: 15,
                 ),
-                Text(widget.hotel.name),
+                SizedBox(
+                  height: 30,
+                  child: DefaultTextStyle(
+                    style: const TextStyle(
+                      fontSize: 20.0,
+                      // fontFamily: 'Horizon'
+
+                    ),
+                    child: AnimatedTextKit(
+                      animatedTexts: [
+                        FadeAnimatedText(widget.hotel.name,
+                          textStyle: TextStyle(
+                            color: Colors.lightBlue,
+                          ),
+                        ),
+                      ],
+                      onTap: () {
+                        print("Tap Event");
+                      },
+                    ),
+                  ),
+                ),
                 SizedBox(
                   height: 15,
                 ),
@@ -95,6 +116,7 @@ class _DetailPageState extends State<DetailPage> {
                       Icons.location_on,
                       color: Colors.lightBlue,
                     ),
+
                     Text(
                       widget.hotel.location,
                       style: TextStyle(
@@ -132,33 +154,8 @@ class _DetailPageState extends State<DetailPage> {
                   style: TextStyle(
                     color: Colors.lightBlue,
                   ),
-                )
-                // SizedBox(
-                //   width: 100,
-                //   child: DefaultTextStyle(
-                //     style: TextStyle(
-                //       fontSize: 40.0,
-                //       // fontFamily: 'Horizon',
-                //     ),
-                //     child: AnimatedTextKit(
-                //       animatedTexts: [
-                //         TypewriterAnimatedText(
-                //           'Hello world!',
-                //           textStyle: const TextStyle(
-                //             fontSize: 32.0,
-                //             fontWeight: FontWeight.bold,
-                //           ),
-                //           speed: const Duration(milliseconds: 2000),
-                //         ),
-                //       ],
-                //
-                //       totalRepeatCount: 4,
-                //       pause: const Duration(milliseconds: 1000),
-                //       displayFullTextOnTap: true,
-                //       stopPauseOnTap: true,
-                //     )
-                //   ),
-                // ),
+                ),
+
               ],
             ),
           ),
