@@ -132,10 +132,6 @@ class _HomePageState extends State<HomePage> {
       return const <Card>[];
     }
 
-    final ThemeData theme = Theme.of(context);
-    final NumberFormat formatter = NumberFormat.simpleCurrency(
-        locale: Localizations.localeOf(context).toString());
-
     return hotels.map((hotel) {
       return Card(
         clipBehavior: Clip.antiAlias,
