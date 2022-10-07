@@ -7,9 +7,14 @@ import 'model/favorite_hotel_repository.dart';
 import 'model/hotel.dart';
 import 'model/hotels_repository.dart';
 
-class MyPage extends StatelessWidget {
+class MyPage extends StatefulWidget {
   const MyPage({Key? key}) : super(key: key);
 
+  @override
+  State<MyPage> createState() => _MyPageState();
+}
+
+class _MyPageState extends State<MyPage> {
   List<Card> _buildListCards(BuildContext context) {
     List<Hotel> hotels = HotelRepository.loadHotel();
     List<Card> favoriteCard = List.empty(growable: true);
@@ -32,9 +37,12 @@ class MyPage extends StatelessWidget {
                     height: 150,
                     width: MediaQuery.of(context).size.width - 50,
                     child: InkWell(
-                      child: Image.asset(
-                        hotels[i - 1].assetName,
-                        fit: BoxFit.fill,
+                      child: Hero(
+                      tag: hotels[i - 1].assetName,
+                        child: Image.asset(
+                          hotels[i - 1].assetName,
+                          fit: BoxFit.fill,
+                        ),
                       ),
                       onTap: () {
                         Navigator.push(
@@ -45,14 +53,28 @@ class MyPage extends StatelessWidget {
                       },
                     ),
                   ),
-                  Text(
-                    hotels[i - 1].name,
+                  Positioned(
+                    bottom: 35,
+                    left: 10,
+                    child: Text(
+                      hotels[i - 1].name,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontSize: 14,
+                      ),
+                    ),
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    hotels[i - 1].location,
+                  Positioned(
+                    bottom: 25,
+                    left: 10,
+                    child: Text(
+                      hotels[i - 1].location,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                      ),
+                    ),
                   ),
                 ],
               ),
