@@ -215,21 +215,80 @@ class _SearchPageState extends State<SearchPage> {
                 ),
               ),
             ),
-            Container(
-              width: 131.0,
-              height: 31.0,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  //padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  backgroundColor: Colors.blue,
+            SizedBox(
+              height: 250,
+            ),
+            Center(
+              child: Container(
+                width: 150.0,
+                height: 50.0,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    //padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    backgroundColor: Colors.blue,
+                  ),
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Container(
+                              height: 100,
+                              color: Colors.blue,
+                              child: Text(
+                                'Please check your choice :)',
+                                style: TextStyle(
+                                  fontSize: 24.0,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                            content: SingleChildScrollView(
+                              child: ListBody(children: <Widget>[]),
+                            ),
+                            actions: <Widget>[
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.center,
+                                children: [
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text('Search'),
+                                  ),
+                                  SizedBox(
+                                    width: 20,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      //padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(10)),
+                                      backgroundColor: Colors.grey,
+                                    ),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text('Cancel'),
+                                  ),
+                                ],
+                              )
+                            ],
+                          );
+                        });
+                  },
+                  child: Text(
+                    "Search",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                    ),
+                  ),
                 ),
-                onPressed: () {},
-                child: Text("Search",
-                style: TextStyle(
-                  color: Colors.white,
-                ),),
               ),
             ),
           ],
