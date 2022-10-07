@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -11,7 +12,8 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   bool _isOpen = false;
   var isCheckedList = [false, false, false];
-  // DateTime
+
+  DateTime _selectedDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +22,11 @@ class _SearchPageState extends State<SearchPage> {
         title: Text("Search"),
         centerTitle: true,
       ),
-      body: ListView(
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16.0, 16.0, 8.0, 8.0),
-            child: ExpansionPanelList(
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(16.0, 16.0, 8.0, 8.0),
+        child: ListView(
+          children: [
+            ExpansionPanelList(
               animationDuration: Duration(milliseconds: 1000),
               elevation: 4,
               children: [
@@ -118,13 +120,6 @@ class _SearchPageState extends State<SearchPage> {
                               Text("Free breakfast"),
                             ],
                           ),
-                          Text(
-                            "Date",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
-                          ),
                         ],
                       ),
                     ),
@@ -139,13 +134,107 @@ class _SearchPageState extends State<SearchPage> {
                 setState(() {});
               },
             ),
-          ),
-        ],
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              "Date",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 30, right: 30),
+              child: Container(
+                width: MediaQuery.of(context).size.width * 2 / 5,
+                height: 150,
+                child: Row(
+                  children: [
+                    Container(
+                      height: 100,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.calendar_month,
+                              ),
+                              Text("check-in"),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            '${DateFormat('yyyy').format(_selectedDate)}.${DateFormat('MM').format(_selectedDate)}.${DateFormat('dd').format(_selectedDate)} (${DateFormat('E').format(_selectedDate).toUpperCase()})',
+                          ),
+                          Text(
+                            '${DateFormat('HH').format(_selectedDate)}:${DateFormat('mm').format(_selectedDate)} ${DateFormat('a').format(_selectedDate).toLowerCase()}',
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: 40,
+                    ),
+                    Container(
+                      width: 150,
+                      child: OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                          backgroundColor: Color(0xFFBDDFFD),
+                        ),
+                        onPressed: () {
+                          Future<DateTime?> future = showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime.now(),
+                            lastDate: DateTime(2023),
+                          );
+
+                          future.then((date) {
+                            setState(() {
+                              _selectedDate =
+                                  date!.add(const Duration(hours: 9));
+                            });
+                          });
+                        },
+                        child: Text(
+                          "select date",
+                          style: TextStyle(
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              width: 131.0,
+              height: 31.0,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  //padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  backgroundColor: Colors.blue,
+                ),
+                onPressed: () {},
+                child: Text("Search",
+                style: TextStyle(
+                  color: Colors.white,
+                ),),
+              ),
+            ),
+          ],
+        ),
       ),
     );
-  }
-
-  Text headText() {
-    return Text("야호");
   }
 }
