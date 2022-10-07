@@ -20,13 +20,45 @@ class MyPage extends StatelessWidget {
 
     for (int i = 1; i <= 6; i++) {
       if (FavoriteHotelRepository.favorite[i]) {
-        favoriteCard.add(Card(
-          clipBehavior: Clip.antiAlias,
-          child: Image.asset(
-            hotels[i - 1].assetName,
-            fit: BoxFit.fill,
+        favoriteCard.add(
+          Card(
+            clipBehavior: Clip.antiAlias,
+            child: SizedBox(
+              height: 150,
+              width: MediaQuery.of(context).size.width - 50,
+              child: Stack(
+                children: [
+                  SizedBox(
+                    height: 150,
+                    width: MediaQuery.of(context).size.width - 50,
+                    child: InkWell(
+                      child: Image.asset(
+                        hotels[i - 1].assetName,
+                        fit: BoxFit.fill,
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    DetailPage(hotels[i - 1])));
+                      },
+                    ),
+                  ),
+                  Text(
+                    hotels[i - 1].name,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    hotels[i - 1].location,
+                  ),
+                ],
+              ),
+            ),
           ),
-        ));
+        );
       }
     }
     return favoriteCard;
