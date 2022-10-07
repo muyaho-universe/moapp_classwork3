@@ -224,7 +224,8 @@ class _HomePageState extends State<HomePage> {
               leading: Icon(Icons.home),
               iconColor: Colors.blueAccent,
               onTap: () {
-                Navigator.of(context).pop();
+                // Navigator.of(context).pop();
+                Navigator.pushNamed(context, '/home');
               },
             ),
             ListTile(

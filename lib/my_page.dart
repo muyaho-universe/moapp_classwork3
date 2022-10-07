@@ -66,7 +66,7 @@ class _MyPageState extends State<MyPage> {
                     ),
                   ),
                   Positioned(
-                    bottom: 25,
+                    bottom: 20,
                     left: 10,
                     child: Text(
                       hotels[i - 1].location,
