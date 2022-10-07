@@ -261,7 +261,62 @@ class _SearchPageState extends State<SearchPage> {
                               ),
                             ),
                             content: SingleChildScrollView(
-                              child: ListBody(children: <Widget>[]),
+                              child: ListBody(children: <Widget>[
+                                Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.filter_list,
+                                          color: Colors.lightBlue,
+                                        ),
+                                        SizedBox(
+                                          width: 20,
+                                        ),
+                                        Container(
+                                          width: 220,
+                                          child: Text(
+                                            filterText(),
+                                            maxLines: 2,
+                                            style: TextStyle(
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 30,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.calendar_month,
+                                          color: Colors.lightBlue,
+                                        ),
+                                        SizedBox(
+                                          width: 20,
+                                        ),
+                                        Text(
+                                          "IN",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 20,
+                                        ),
+                                        Text(
+                                          '${DateFormat('yyyy').format(_selectedDate)}.${DateFormat('MM').format(_selectedDate)}.${DateFormat('dd').format(_selectedDate)} (${DateFormat('E').format(_selectedDate).toUpperCase()})',
+                                          style: TextStyle(
+                                            color: Colors.grey,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ]),
                             ),
                             actions: <Widget>[
                               Row(
@@ -278,7 +333,6 @@ class _SearchPageState extends State<SearchPage> {
                                   ),
                                   ElevatedButton(
                                     style: ElevatedButton.styleFrom(
-                                      //padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(10)),
@@ -309,5 +363,22 @@ class _SearchPageState extends State<SearchPage> {
         ),
       ),
     );
+  }
+
+  String filterText() {
+    String str = "";
+
+    if (isCheckedList[0]) {
+      str += "No Kids Zone / ";
+    }
+    if (isCheckedList[1]) {
+      str += "Pet-Friendly / ";
+    }
+    if (isCheckedList[2]) {
+      str += "Free breakfast / ";
+    }
+    print(str);
+
+    return str;
   }
 }
