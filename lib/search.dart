@@ -11,6 +11,7 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   bool _isOpen = false;
   var isCheckedList = [false, false, false];
+  // DateTime
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,9 @@ class _SearchPageState extends State<SearchPage> {
                         Text(
                           "Filter",
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
                         ),
                         SizedBox(
                           width: 10,
@@ -55,16 +58,14 @@ class _SearchPageState extends State<SearchPage> {
                   body: Container(
                     padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
                     child: Center(
-
                       child: Column(
                         // mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-
                           Row(
                             // mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SizedBox(
-                                width: MediaQuery.of(context).size.width/3,
+                                width: MediaQuery.of(context).size.width / 3,
                               ),
                               Checkbox(
                                 checkColor: Colors.white,
@@ -78,14 +79,12 @@ class _SearchPageState extends State<SearchPage> {
                               ),
                               Text("No Kids Zone"),
                             ],
-
                           ),
-
                           Row(
                             // mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SizedBox(
-                                width: MediaQuery.of(context).size.width/3,
+                                width: MediaQuery.of(context).size.width / 3,
                               ),
                               Checkbox(
                                 checkColor: Colors.white,
@@ -99,14 +98,12 @@ class _SearchPageState extends State<SearchPage> {
                               ),
                               Text("Pet-Friendly"),
                             ],
-
                           ),
-
                           Row(
                             // mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SizedBox(
-                                width: MediaQuery.of(context).size.width/3,
+                                width: MediaQuery.of(context).size.width / 3,
                               ),
                               Checkbox(
                                 checkColor: Colors.white,
@@ -121,7 +118,13 @@ class _SearchPageState extends State<SearchPage> {
                               Text("Free breakfast"),
                             ],
                           ),
-
+                          Text(
+                            "Date",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
                         ],
                       ),
                     ),
