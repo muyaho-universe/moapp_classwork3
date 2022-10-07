@@ -17,5 +17,5 @@ class Hotel {
   final String description;
   final int id;
 
-  String get assetName => 'hotel0$id.jpg';
+  String get assetName => 'assets/hotel0$id.jpg';
 }
