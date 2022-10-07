@@ -224,8 +224,7 @@ class _HomePageState extends State<HomePage> {
               leading: Icon(Icons.home),
               iconColor: Colors.blueAccent,
               onTap: () {
-                // Update the state of the app.
-                // ...
+                Navigator.of(context).pop();
               },
             ),
             ListTile(
