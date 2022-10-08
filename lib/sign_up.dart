@@ -57,13 +57,19 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
 // spacer
               const SizedBox(height: 12.0),
-              TextField(
+              TextFormField(
                 controller: _passwordController,
                 decoration: const InputDecoration(
                   filled: true,
                   labelText: 'Password',
                 ),
                 obscureText: true,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please enter Password';
+                  }
+                  return null;
+                },
               ),
               const SizedBox(height: 12.0),
               TextFormField(
